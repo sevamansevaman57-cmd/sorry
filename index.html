@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тебя, моя любимая</title>
+    <style>
+        /* Стили оформления (дизайн сайта) */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe6e6, #ffffff);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .heart-icon {
+            font-size: 50px;
+            color: #ff4d6d;
+            margin-bottom: 20px;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.1); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #ff4d6d;
+            margin-bottom: 15px;
+        }
+
+        /* Стиль для фото (можете заменить ссылку на свою) */
+        .photo-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #eee url('https://picsum.photos') no-repeat center/cover;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .buttons-container {
+            margin-top: 35px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 60px;
+            position: relative;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        /* Зеленая кнопка согласия */
+        .btn-yes {
+            background-color: #2ccf76;
+            color: white;
+            box-shadow: 0 5px 15px rgba(44, 207, 118, 0.3);
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(44, 207, 118, 0.5);
+        }
+
+        /* Убегающая кнопка */
+        .btn-no {
+            background-color: #ff4d6d;
+            color: white;
+            position: absolute;
+            transition: left 0.1s ease, top 0.1s ease;
+            z-index: 10;
+        }
+
+        /* Экран успеха при нажатии "Прощаю" */
+        .success-screen {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 20px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            z-index: 20;
+        }
+
+        .success-screen h2 {
+            color: #2ccf76;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="heart-icon">❤️</div>
+        
+        <!-- Замените имя Маша на имя вашей девушки -->
+        <h1>Машенька, прости меня, пожалуйста...</h1>
+        
+        <!-- Вместо тестовой ссылки вставьте ссылку на ваше совместное фото -->
+        <div class="photo-placeholder"></div>
+
+        <!-- Ваш текст извинения -->
+        <p>Я очень сильно дорожу тобой и нашими отношениями. Мне искренне жаль, что я заставил тебя грустить и совершил глупость.</p>
+        <p>Ты — самое лучшее, что есть в моей жизни, и я хочу делать тебя счастливой, а не расстраивать. Я всё осознал и обещаю исправиться.</p>
+        <p>Пожалуйста, давай оставим этот глупый момент позади? Ты прощаешь меня?</p>
+
+        <!-- Блок с кнопками -->
+        <div class="buttons-container">
+            <button class="btn btn-yes" onclick="showSuccess()">Да, прощаю</button>
+            <button class="btn btn-no" id="noBtn">Нет</button>
+        </div>
+
+        <!-- Окно, которое появится после прощения -->
+        <div class="success-screen" id="successScreen">
+            <div style="font-size: 60px; margin-bottom: 20px;">🥰</div>
+            <h2>Ура! Спасибо тебе!</h2>
+            <p style="text-align: center;">Ты даже не представляешь, как я счастлив. Бегу к тебе с обнимашками и цветами! ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const container = document.querySelector('.buttons-container');
+
+        // Функция, заставляющая кнопку "Нет" убегать
+        function moveButton() {
+            // Границы контейнера, чтобы кнопка не улетала за пределы экрана
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+
+            // Вычисляем случайные координаты внутри контейнера кнопок
+            // Смещение по вертикали увеличено для лучшего маневра
+            const randomX = Math.floor(Math.random() * (containerWidth - noBtn.offsetWidth));
+            const randomY = Math.floor((Math.random() * 160) - 80); // бегает выше/ниже центра
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        // Обработка наведения мышки (для ПК) и касания (для телефонов)
+        noBtn.addEventListener('mouseenter', moveButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // отменяет стандартное нажатие
+            moveButton();
+        });
+
+        // Функция при нажатии на "Да, прощаю"
+        function showSuccess() {
+            document.getElementById('successScreen').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
