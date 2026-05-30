@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Для тебя, моя любимая</title>
+    <title>Для тебя, Кайдочка</title>
     <style>
         /* Стили оформления (дизайн сайта) */
         * {
@@ -14,7 +14,8 @@
         }
 
         body {
-            background: linear-gradient(135deg, #ffe6e6, #ffffff);
+            /* Мягкий фиолетовый градиент на фоне */
+            background: linear-gradient(135deg, #e6d5f7, #f4ebfc);
             color: #333;
             line-height: 1.6;
             padding: 20px;
@@ -28,7 +29,7 @@
             background: white;
             padding: 40px 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(128, 0, 128, 0.08);
             max-width: 600px;
             width: 100%;
             text-align: center;
@@ -37,7 +38,7 @@
 
         .heart-icon {
             font-size: 50px;
-            color: #ff4d6d;
+            color: #9c27b0; /* Фиолетовое сердечко */
             margin-bottom: 20px;
             animation: heartbeat 1.2s infinite;
         }
@@ -52,11 +53,11 @@
 
         h1 {
             font-size: 28px;
-            color: #ff4d6d;
+            color: #7b1fa2; /* Фиолетовый заголовок */
             margin-bottom: 15px;
         }
 
-        /* Стиль для фото (можете заменить ссылку на свою) */
+        /* Стиль для фото */
         .photo-placeholder {
             width: 100%;
             height: 250px;
@@ -139,16 +140,16 @@
 <body>
 
     <div class="card">
-        <div class="heart-icon">❤️</div>
+        <div class="heart-icon">💜</div>
         
-        <!-- Замените имя Маша на имя вашей девушки -->
+        <!-- Заголовок с именем -->
         <h1>Кайдочка, прости меня, пожалуйста...</h1>
         
-        <!-- Вместо тестовой ссылки вставьте ссылку на ваше совместное фото -->
+        <!-- Фотография-заглушка -->
         <div class="photo-placeholder"></div>
 
-        <!-- Ваш текст извинения -->
-        <p>Я очень сильно дорожу тобой и нашими отношениями. Мне искренне жаль, что я заставил тебя грустить и совершил глупость.</p>
+        <!-- Текст извинения с заменой на "наше общение" -->
+        <p>Я очень сильно дорожу тобой и нашим общением. Мне искренне жаль, что я заставил тебя грустить и совершил глупость.</p>
         <p>Ты — самое лучшее, что есть в моей жизни, и я хочу делать тебя счастливой, а не расстраивать. Я всё осознал и обещаю исправиться.</p>
         <p>Пожалуйста, давай оставим этот глупый момент позади? Ты прощаешь меня?</p>
 
@@ -166,33 +167,28 @@
         </div>
     </div>
 
-    <script>
+    <script {nonce}>
         const noBtn = document.getElementById('noBtn');
         const container = document.querySelector('.buttons-container');
 
-        // Функция, заставляющая кнопку "Нет" убегать
+        // Функция убегания кнопки
         function moveButton() {
-            // Границы контейнера, чтобы кнопка не улетала за пределы экрана
             const containerWidth = container.clientWidth;
             const containerHeight = container.clientHeight;
 
-            // Вычисляем случайные координаты внутри контейнера кнопок
-            // Смещение по вертикали увеличено для лучшего маневра
             const randomX = Math.floor(Math.random() * (containerWidth - noBtn.offsetWidth));
-            const randomY = Math.floor((Math.random() * 160) - 80); // бегает выше/ниже центра
+            const randomY = Math.floor((Math.random() * 160) - 80);
 
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
         }
 
-        // Обработка наведения мышки (для ПК) и касания (для телефонов)
         noBtn.addEventListener('mouseenter', moveButton);
         noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // отменяет стандартное нажатие
+            e.preventDefault();
             moveButton();
         });
 
-        // Функция при нажатии на "Да, прощаю"
         function showSuccess() {
             document.getElementById('successScreen').style.display = 'flex';
         }
